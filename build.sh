@@ -4,7 +4,6 @@ export BRANCH=master
 export IMAGE_NAME=shipimg/rdsbase
 export IMAGE_TAG=$BRANCH.$BUILD_NUMBER
 export RES_DOCKER_CREDS=docker-creds
-export RES_DOCKER_CREDS_INT=shipDH.json
 export RES_RDS_REPO=rdsbase-repo
 export RES_RDS_IMAGE=rdsbase-img
 
@@ -23,8 +22,7 @@ dockerPush() {
 
 dockerLogin() {
   echo "Extracting docker creds"
-  cat ./IN/$RES_DOCKER_CREDS/integration.json  | jq -r '.formJSONValues | map(.label + "=" + .value)|.[]' > dockerInt.sh
-  . dockerInt.sh
+  . ./IN/$RES_DOCKER_CREDS/integration.env
   echo "logging into Docker with username" $username
   docker login -u $username -p $password
   echo "Completed Docker login"
