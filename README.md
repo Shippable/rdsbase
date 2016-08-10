@@ -1,2 +1,2 @@
-# rdsbase
-redis base image for Shippable WWW
+# rds
+redis image used for shippable service
